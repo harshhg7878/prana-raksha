@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prana Raksha Accident Detection</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="workspace">
+        <div class="panel upload-panel">
+          <div class="brand-row">
+            <div class="brand-mark">PR</div>
+            <div>
+              <h1>Accident Detection</h1>
+              <p>Upload a dashcam image and inspect the model result.</p>
+            </div>
+          </div>
+
+          <label class="drop-zone" for="imageInput">
+            <input id="imageInput" type="file" accept="image/*" />
+            <span class="drop-icon">+</span>
+            <span class="drop-title">Choose image</span>
+            <span class="drop-subtitle">JPG, PNG, or WEBP</span>
+          </label>
+
+          <button id="predictButton" type="button" disabled>Analyze Image</button>
+        </div>
+
+        <div class="preview-area">
+          <div class="image-frame">
+            <img id="previewImage" alt="Selected dashcam preview" />
+            <canvas id="overlayCanvas"></canvas>
+            <div id="emptyState" class="empty-state">Image preview</div>
+          </div>
+        </div>
+
+        <aside class="panel result-panel">
+          <div id="statusBadge" class="status-badge idle">Waiting</div>
+          <h2 id="resultTitle">No image analyzed</h2>
+          <p id="resultText">Select an image to run your Roboflow model.</p>
+
+          <div class="metric-grid">
+            <div>
+              <span>Provider</span>
+              <strong id="providerValue">-</strong>
+            </div>
+            <div>
+              <span>Confidence</span>
+              <strong id="confidenceValue">-</strong>
+            </div>
+          </div>
+
+          <div class="prediction-list">
+            <h3>Predictions</h3>
+            <div id="predictionList" class="prediction-items"></div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

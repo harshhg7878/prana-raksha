@@ -1,0 +1,19 @@
+.env
+.env.*
+node_modules/
+*.log
+dist/
+build/
+.DS_Store
+ai-service/.venv/
+ai-service/temp/
+ai-service/outputs/
+ai-service/__pycache__/
+twilio_2FA_recovery_code.txt
+backend logic.docx
+ai-service/datasets/*
+!ai-service/datasets/.gitkeep
+!ai-service/datasets/README.md
+ai-service/*.pt
+ai-service/model/*
+!ai-service/model/.gitkeep
