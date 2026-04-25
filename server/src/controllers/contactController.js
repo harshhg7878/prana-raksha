@@ -6,7 +6,7 @@ const HospitalProfile = require("../models/HospitalProfile");
 const HospitalNotification = require("../models/HospitalNotification");
 const AmbulanceDriver = require("../models/AmbulanceDriver");
 const AdminPopupNotification = require("../models/AdminPopupNotification");
-const User = require("../models/User");
+const User = require("../models/user");
 const { sendSms } = require("../services/smsService");
 const { findNearestHospitalsFromMap } = require("../services/openStreetMapService");
 const {
