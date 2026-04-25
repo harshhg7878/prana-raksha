@@ -5,7 +5,6 @@ const contactRoutes = require("./routes/contactRoutes");
 const aiRoutes = require("./routes/aiRoutes");
 const {
   applySecurityHeaders,
-  authRateLimiter,
   apiWriteRateLimiter,
 } = require("./middleware/securityMiddleware");
 
@@ -40,7 +39,6 @@ app.use(
 
 app.use(applySecurityHeaders);
 app.use(express.json({ limit: "20mb" }));
-app.use("/api/auth", authRateLimiter);
 app.use(["/api/contacts", "/api/auth", "/api/ai"], (req, res, next) => {
   if (["POST", "PATCH", "PUT", "DELETE"].includes(req.method)) {
     return apiWriteRateLimiter(req, res, next);
