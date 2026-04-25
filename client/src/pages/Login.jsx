@@ -33,21 +33,6 @@ export default function Login() {
   }, []);
 
   useEffect(() => {
-    if (mode === "register" && role === "admin") {
-      const timeoutId = window.setTimeout(() => {
-        setRole("user");
-        setMessage("Admin registration is restricted. Please use an existing admin account to log in.");
-      }, 0);
-
-      return () => {
-        window.clearTimeout(timeoutId);
-      };
-    }
-
-    return undefined;
-  }, [mode, role]);
-
-  useEffect(() => {
     if (!showPage || typeof window === "undefined") {
       return undefined;
     }
@@ -179,11 +164,6 @@ export default function Login() {
     setMessage("");
 
     try {
-      if (role === "admin") {
-        setMessage("Admin registration is restricted. Please use an existing admin account to log in.");
-        return;
-      }
-
       const res = await apiFetch("/api/auth/register", {
         method: "POST",
         headers: {

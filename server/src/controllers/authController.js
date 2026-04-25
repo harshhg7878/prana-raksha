@@ -43,7 +43,7 @@ const getAdminSettings = async () => {
   return settings;
 };
 
-const allowedRoles = ["user", "hospital"];
+const allowedRoles = ["user", "hospital", "admin"];
 
 const normalizeRole = (value) => {
   if (typeof value !== "string") {
@@ -84,10 +84,6 @@ const registerUser = async (req, res) => {
 
     if (!normalizedName || !normalizedEmail || !password) {
       return res.status(400).json({ message: "All required fields are needed" });
-    }
-
-    if (role === "admin") {
-      return res.status(403).json({ message: "Admin registration is restricted" });
     }
 
     if (!isValidEmail(normalizedEmail)) {
