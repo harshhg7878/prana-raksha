@@ -1,5 +1,17 @@
 const twilio = require("twilio");
 
+const getEnvValue = (...keys) => {
+  for (const key of keys) {
+    const value = String(process.env[key] || "").trim();
+
+    if (value) {
+      return value;
+    }
+  }
+
+  return "";
+};
+
 const normalizePhoneNumber = (value) => {
   const rawValue = String(value || "").trim();
 
@@ -36,8 +48,8 @@ const normalizePhoneNumber = (value) => {
 };
 
 const getSmsClient = () => {
-  const accountSid = String(process.env.SMS_ACCOUNT_SID || "").trim();
-  const authToken = String(process.env.SMS_AUTH_TOKEN || "").trim();
+  const accountSid = getEnvValue("SMS_ACCOUNT_SID", "TWILIO_ACCOUNT_SID");
+  const authToken = getEnvValue("SMS_AUTH_TOKEN", "TWILIO_AUTH_TOKEN");
 
   if (!accountSid || !authToken) {
     throw new Error("SMS provider credentials are not configured");
@@ -48,7 +60,9 @@ const getSmsClient = () => {
 
 const sendSms = async ({ to, body }) => {
   const client = getSmsClient();
-  const from = normalizePhoneNumber(process.env.SMS_FROM);
+  const from = normalizePhoneNumber(
+    getEnvValue("SMS_FROM", "TWILIO_FROM", "TWILIO_PHONE_NUMBER")
+  );
   const normalizedRecipient = normalizePhoneNumber(to);
 
   if (!from) {
